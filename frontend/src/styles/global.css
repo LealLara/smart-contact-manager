@@ -2,39 +2,35 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+}
+
+html,
+body,
+#root{
+    width:100%;
+    min-height:100vh;
 }
 
 body{
 
-    min-height:100vh;
+    overflow-x:hidden;
 
     background:
-        radial-gradient(circle at top, #1e3a8a, #020617);
-
-    background-size:400% 400%;
-
-    animation:spaceAnimation 15s ease infinite;
+    radial-gradient(circle at top,
+    #0f172a 0%,
+    #020617 45%,
+    #000000 100%);
 
     color:white;
 
-    overflow-x:hidden;
+    position:relative;
+
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-@keyframes spaceAnimation{
-
-    0%{
-        background-position:0% 50%;
-    }
-
-    50%{
-        background-position:100% 50%;
-    }
-
-    100%{
-        background-position:0% 50%;
-    }
-}
+/* ========================= */
+/* ESTRELAS FIXAS */
+/* ========================= */
 
 body::before{
 
@@ -42,24 +38,42 @@ body::before{
 
     position:fixed;
 
-    width:600px;
-    height:600px;
+    inset:0;
 
-    background:#2563eb;
+    background-image:
 
-    border-radius:50%;
+        radial-gradient(white 1px, transparent 1px),
 
-    filter:blur(180px);
+        radial-gradient(#93c5fd 1px, transparent 1px),
 
-    top:-200px;
-    left:-200px;
+        radial-gradient(rgba(255,255,255,.9) 2px, transparent 2px),
 
-    opacity:0.3;
+        radial-gradient(rgba(96,165,250,.8) 2px, transparent 2px);
 
-    animation:floatGlow 12s infinite alternate;
+    background-size:
 
-    z-index:-1;
+        120px 120px,
+        180px 180px,
+        260px 260px,
+        340px 340px;
+
+    background-position:
+
+        0 0,
+        40px 60px,
+        130px 90px,
+        200px 160px;
+
+    opacity:.45;
+
+    z-index:-3;
+
+    pointer-events:none;
 }
+
+/* ========================= */
+/* NEBULOSA */
+/* ========================= */
 
 body::after{
 
@@ -67,43 +81,72 @@ body::after{
 
     position:fixed;
 
-    width:500px;
-    height:500px;
-
-    background:#60a5fa;
+    width:900px;
+    height:900px;
 
     border-radius:50%;
 
-    filter:blur(180px);
+    background:
+    radial-gradient(circle,
+    rgba(37,99,235,0.30),
+    transparent 70%);
 
-    bottom:-200px;
-    right:-200px;
+    filter:blur(140px);
 
-    opacity:0.2;
+    top:-250px;
+    left:-250px;
 
-    animation:floatGlow2 10s infinite alternate;
+    animation:nebulaMove 18s ease infinite alternate;
+
+    z-index:-2;
+
+    pointer-events:none;
+}
+
+@keyframes nebulaMove{
+
+    from{
+        transform:translate(0px,0px);
+    }
+
+    to{
+        transform:translate(120px,90px);
+    }
+}
+
+/* ========================= */
+/* BRILHO ESPACIAL */
+/* ========================= */
+
+.space-glow{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at center,
+    rgba(59,130,246,.10),
+    transparent 60%);
 
     z-index:-1;
+
+    pointer-events:none;
 }
 
-@keyframes floatGlow{
+/* ========================= */
+/* SCROLL */
+/* ========================= */
 
-    from{
-        transform:translateY(0px);
-    }
-
-    to{
-        transform:translateY(80px);
-    }
+::-webkit-scrollbar{
+    width:10px;
 }
 
-@keyframes floatGlow2{
+::-webkit-scrollbar-track{
+    background:#020617;
+}
 
-    from{
-        transform:translateX(0px);
-    }
-
-    to{
-        transform:translateX(-80px);
-    }
+::-webkit-scrollbar-thumb{
+    background:#1e3a8a;
+    border-radius:999px;
 }

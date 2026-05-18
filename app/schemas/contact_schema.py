@@ -1,18 +1,30 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class ContactCreate(BaseModel):
+
     name: str
-    email: str | None = None
-    phone: str | None = None
+
+    contact: str
+
+    notes: str | None = None
 
 
 class ContactResponse(BaseModel):
+
     id: int
+
     name: str
-    email: str | None
-    phone: str | None
-    favorite: bool
+
+    contact: str
+
+    notes: str | None
+
+    created_at: datetime
+
+    user_id: int
 
     class Config:
+
         from_attributes = True

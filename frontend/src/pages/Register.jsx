@@ -35,7 +35,7 @@ function Register() {
 
         } catch (error) {
 
-            toast.error("Erro ao cadastrar");
+            toast.error("Falha ao cadastrar");
         }
     }
 
@@ -67,7 +67,7 @@ function Register() {
                 }}
             >
 
-                <h1>Cadastro</h1>
+                <h1>Criar Conta</h1>
 
                 <input
                     placeholder="Usuário"

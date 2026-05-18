@@ -25,6 +25,7 @@ function Login() {
                 password
             });
 
+            console.log(response.data);
             localStorage.setItem(
                 "token",
                 response.access_token

@@ -2,11 +2,11 @@ from fastapi_mail import ConnectionConfig
 
 conf = ConnectionConfig(
 
-    MAIL_USERNAME="SEU_EMAIL",
+    MAIL_USERNAME="usr",
 
-    MAIL_PASSWORD="SUA_SENHA_APP",
+    MAIL_PASSWORD="******",
 
-    MAIL_FROM="SEU_EMAIL",
+    MAIL_FROM="teste@teste.com",
 
     MAIL_PORT=587,
 

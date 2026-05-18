@@ -5,11 +5,24 @@ from app.models.user_model import User
 
 class UserRepository:
 
+    def get_by_email(
+        self,
+        db: Session,
+        email: str
+    ):
+
+        return (
+            db.query(User)
+            .filter(User.email == email)
+            .first()
+        )
+
     def create(
         self,
         db: Session,
         user: User
     ):
+
         db.add(user)
 
         db.commit()
@@ -17,12 +30,3 @@ class UserRepository:
         db.refresh(user)
 
         return user
-
-    def get_by_email(
-        self,
-        db: Session,
-        email: str
-    ):
-        return db.query(User).filter(
-            User.email == email
-        ).first()

@@ -4,26 +4,53 @@ function ContactCard({ contact }) {
 
         <div
             style={{
-                background: "#111827",
-                padding: "20px",
-                borderRadius: "18px",
-                width: "300px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                border: "1px solid #1e3a8a",
-                backdropFilter:"blur(10px)",
-                background:"rgba(17,24,39,0.7)",
-                boxShadow:"0 0 20px rgba(37,99,235,0.2)"
+
+                padding:"24px",
+
+                borderRadius:"24px",
+
+                background:"rgba(15,23,42,0.55)",
+
+                backdropFilter:"blur(14px)",
+
+                border:
+                "1px solid rgba(255,255,255,0.08)",
+
+                boxShadow:
+                "0 0 30px rgba(59,130,246,0.12)",
+
+                display:"flex",
+
+                flexDirection:"column",
+
+                gap:"10px"
             }}
-            
         >
 
             <h2>{contact.name}</h2>
 
-            <p>{contact.email}</p>
+            <p>{contact.contact}</p>
 
-            <p>{contact.phone}</p>
+            {contact.notes && (
+
+                <p
+                    style={{
+                        opacity:0.7
+                    }}
+                >
+                    {contact.notes}
+                </p>
+            )}
+
+            <small
+                style={{
+                    opacity:0.5
+                }}
+            >
+                {new Date(
+                    contact.created_at
+                ).toLocaleDateString()}
+            </small>
 
         </div>
     );

@@ -3,12 +3,10 @@ from sqlalchemy.orm import Session
 from app.core.security import hash_password
 from app.core.security import verify_password
 from app.core.security import create_access_token
-
 from app.models.user_model import User
-
 from app.repositories.user_repository import UserRepository
-
 from app.schemas.user_schema import UserCreate
+from app.services.email_service import send_welcome_email
 
 
 class AuthService:
@@ -38,6 +36,8 @@ class AuthService:
                 data.password
             )
         )
+       
+       # send_welcome_email(user.email)
 
         return self.repository.create(
             db,

@@ -1,9 +1,41 @@
+import { useState } from "react";
+
 import { motion } from "framer-motion";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { loginUser } from "../services/authService";
 
 
 function Login() {
+
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("");
+
+    const [password, setPassword] = useState("");
+
+    async function handleLogin() {
+
+        try {
+
+            const response = await loginUser({
+                email,
+                password
+            });
+
+            localStorage.setItem(
+                "token",
+                response.access_token
+            );
+
+            navigate("/dashboard");
+
+        } catch (error) {
+
+            alert("Login inválido");
+        }
+    }
 
     return (
 
@@ -18,9 +50,9 @@ function Login() {
 
             <motion.div
 
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0 }}
 
-                animate={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1 }}
 
                 style={{
                     background: "#111827",
@@ -29,42 +61,39 @@ function Login() {
                     width: "400px",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "20px",
-                    boxShadow: "0 0 30px rgba(37,99,235,0.3)"
+                    gap: "20px"
                 }}
             >
 
-                <h1
-                    style={{
-                        textAlign: "center",
-                        fontSize: "36px"
-                    }}
-                >
-                    Login
-                </h1>
+                <h1>Login</h1>
 
                 <input
                     placeholder="Email"
                     style={inputStyle}
+                    value={email}
+                    onChange={(e) =>
+                        setEmail(e.target.value)
+                    }
                 />
 
                 <input
                     type="password"
                     placeholder="Senha"
                     style={inputStyle}
+                    value={password}
+                    onChange={(e) =>
+                        setPassword(e.target.value)
+                    }
                 />
 
-                <button style={buttonStyle}>
+                <button
+                    style={buttonStyle}
+                    onClick={handleLogin}
+                >
                     Entrar
                 </button>
 
-                <Link
-                    to="/register"
-                    style={{
-                        textAlign: "center",
-                        color: "#60a5fa"
-                    }}
-                >
+                <Link to="/register">
                     Criar conta
                 </Link>
 
@@ -79,8 +108,7 @@ const inputStyle = {
     borderRadius: "12px",
     border: "none",
     background: "#1f2937",
-    color: "white",
-    fontSize: "16px"
+    color: "white"
 };
 
 const buttonStyle = {
@@ -88,8 +116,7 @@ const buttonStyle = {
     border: "none",
     borderRadius: "12px",
     background: "#2563eb",
-    color: "white",
-    fontSize: "18px"
+    color: "white"
 };
 
 export default Login;

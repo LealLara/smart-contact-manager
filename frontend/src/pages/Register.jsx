@@ -1,9 +1,42 @@
+import { useState } from "react";
+
 import { motion } from "framer-motion";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { registerUser } from "../services/authService";
 
 
 function Register() {
+
+    const navigate = useNavigate();
+
+    const [username, setUsername] = useState("");
+
+    const [email, setEmail] = useState("");
+
+    const [password, setPassword] = useState("");
+
+
+    async function handleRegister() {
+
+        try {
+
+            await registerUser({
+                username,
+                email,
+                password
+            });
+
+            alert("Conta criada!");
+
+            navigate("/login");
+
+        } catch (error) {
+
+            alert("Erro ao cadastrar");
+        }
+    }
 
     return (
 
@@ -18,9 +51,9 @@ function Register() {
 
             <motion.div
 
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0 }}
 
-                animate={{ opacity: 1, scale: 1 }}
+                animate={{ opacity: 1 }}
 
                 style={{
                     background: "#111827",
@@ -29,49 +62,46 @@ function Register() {
                     width: "420px",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "20px",
-                    boxShadow: "0 0 30px rgba(37,99,235,0.3)"
+                    gap: "20px"
                 }}
             >
 
-                <h1
-                    style={{
-                        textAlign: "center",
-                        fontSize: "36px"
-                    }}
-                >
-                    Cadastro
-                </h1>
+                <h1>Cadastro</h1>
 
                 <input
                     placeholder="Usuário"
                     style={inputStyle}
+                    value={username}
+                    onChange={(e) =>
+                        setUsername(e.target.value)
+                    }
                 />
 
                 <input
                     placeholder="Email"
                     style={inputStyle}
+                    value={email}
+                    onChange={(e) =>
+                        setEmail(e.target.value)
+                    }
                 />
 
                 <input
                     type="password"
                     placeholder="Senha"
                     style={inputStyle}
+                    value={password}
+                    onChange={(e) =>
+                        setPassword(e.target.value)
+                    }
                 />
 
-                <button style={buttonStyle}>
+                <button
+                    style={buttonStyle}
+                    onClick={handleRegister}
+                >
                     Criar Conta
                 </button>
-
-                <Link
-                    to="/login"
-                    style={{
-                        textAlign: "center",
-                        color: "#60a5fa"
-                    }}
-                >
-                    Já possui conta?
-                </Link>
 
             </motion.div>
 
@@ -84,8 +114,7 @@ const inputStyle = {
     borderRadius: "12px",
     border: "none",
     background: "#1f2937",
-    color: "white",
-    fontSize: "16px"
+    color: "white"
 };
 
 const buttonStyle = {
@@ -93,8 +122,7 @@ const buttonStyle = {
     border: "none",
     borderRadius: "12px",
     background: "#2563eb",
-    color: "white",
-    fontSize: "18px"
+    color: "white"
 };
 
 export default Register;

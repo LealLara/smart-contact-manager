@@ -25,7 +25,7 @@ app.add_middleware(
 
 app.include_router(auth_router)
 
-
+app.include_router(contact_router)
 @app.get("/")
 def root():
     return {"message": "Smart Contact Manager API"}

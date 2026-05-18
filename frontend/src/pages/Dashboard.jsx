@@ -4,8 +4,11 @@ import api from "../api/api";
 
 import ContactList from "../components/ContactList";
 
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+
+    const navigate = useNavigate();
 
     const [contacts, setContacts] = useState([]);
 
@@ -33,6 +36,13 @@ function Dashboard() {
         setName("");
 
         setEmail("");
+    }
+
+    async function logout(){
+
+        localStorage.removeItem("token");
+        toast.success("Logout realizado");
+        navigate("/login");
     }
 
     useEffect(() => {
@@ -89,7 +99,21 @@ function Dashboard() {
 
             <ContactList contacts={contacts} />
 
+
+            <button
+                onClick={logout}
+                style={{
+                padding:"12px 20px",
+                border:"none",
+                borderRadius:"12px",
+                background:"#dc2626",
+                color:"white",
+                cursor:"pointer"
+            }}>Sair</button> 
+    
         </div>
+
+        
     );
 }
 

@@ -11,8 +11,12 @@ function ContactCard({ contact }) {
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
-                border: "1px solid #1e3a8a"
+                border: "1px solid #1e3a8a",
+                backdropFilter:"blur(10px)",
+                background:"rgba(17,24,39,0.7)",
+                boxShadow:"0 0 20px rgba(37,99,235,0.2)"
             }}
+            
         >
 
             <h2>{contact.name}</h2>

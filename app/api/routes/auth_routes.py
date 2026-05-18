@@ -10,6 +10,7 @@ from app.schemas.user_schema import UserCreate
 from app.schemas.user_schema import UserResponse
 
 from app.services.auth_service import AuthService
+from app.schemas.auth_schema import LoginRequest
 
 router = APIRouter()
 
@@ -20,6 +21,7 @@ service = AuthService()
     "/register",
     response_model=UserResponse
 )
+
 def register(
     data: UserCreate,
     db: Session = Depends(get_db)
@@ -37,3 +39,26 @@ def register(
             status_code=400,
             detail=str(error)
         )
+        
+@router.post("/login")
+def login(
+    data: LoginRequest,
+    db: Session = Depends(get_db)
+):
+
+    token = service.login(
+        db,
+        data.email,
+        data.password
+    )
+
+    if not token:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid credentials"
+        )
+
+    return {
+        "access_token": token
+    }

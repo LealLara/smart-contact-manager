@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { registerUser } from "../services/authService";
 
+import { toast } from "react-toastify";
 
 function Register() {
 
@@ -28,13 +29,13 @@ function Register() {
                 password
             });
 
-            alert("Conta criada!");
+            toast.success("Conta criada com sucesso!");
 
             navigate("/login");
 
         } catch (error) {
 
-            alert("Erro ao cadastrar");
+            toast.error("Erro ao cadastrar");
         }
     }
 

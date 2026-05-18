@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { loginUser } from "../services/authService";
 
+import { toast } from "react-toastify";
 
 function Login() {
 
@@ -29,11 +30,13 @@ function Login() {
                 response.access_token
             );
 
+            toast.success("Boas vindas!");
+
             navigate("/dashboard");
 
         } catch (error) {
 
-            alert("Login inválido");
+             toast.error("Email ou senha inválidos");
         }
     }
 
